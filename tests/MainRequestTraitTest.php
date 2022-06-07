@@ -45,6 +45,31 @@ final class MainRequestTraitTest extends TestCase
         $consumer = new ChildConsumer();
         self::assertTrue($consumer->_isMainRequest($event));
     }
+
+    /**
+     * @test
+     */
+    public function it_throws_exception_if_events_main_request_test_does_not_return_bool(): void
+    {
+        $this->expectException(\Throwable::class);
+
+        $request = new Request();
+
+        $kernel = $this->prophesize(HttpKernelInterface::class);
+
+        $event = new class($kernel->reveal(), $request, HttpKernelInterface::MASTER_REQUEST) extends KernelEvent
+        {
+            /** @psalm-suppress InvalidReturnType */
+            public function isMainRequest(): bool
+            {
+                /** @psalm-suppress InvalidReturnStatement */
+                return 'no';
+            }
+        };
+
+        $consumer = new ChildConsumer();
+        $consumer->_isMainRequest($event);
+    }
 }
 
 class Consumer
