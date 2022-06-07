@@ -27,7 +27,7 @@ final class MainRequestTraitTest extends TestCase
         $requestStack->push($mainRequest);
         $requestStack->push($subRequest);
 
-        $consumer = new Consumer();
+        $consumer = new ChildConsumer();
         self::assertSame($mainRequest, $consumer->_getMainRequestFromRequestStack($requestStack));
     }
 
@@ -42,15 +42,21 @@ final class MainRequestTraitTest extends TestCase
 
         $event = new KernelEvent($kernel->reveal(), $request, HttpKernelInterface::MASTER_REQUEST);
 
-        $consumer = new Consumer();
+        $consumer = new ChildConsumer();
         self::assertTrue($consumer->_isMainRequest($event));
     }
 }
 
-final class Consumer
+class Consumer
 {
     use MainRequestTrait;
+}
 
+/**
+ * The reason for the inheritance is that we then make sure the trait works in child classes
+ */
+class ChildConsumer extends Consumer
+{
     public function _getMainRequestFromRequestStack(RequestStack $requestStack): ?Request
     {
         return $this->getMainRequestFromRequestStack($requestStack);
