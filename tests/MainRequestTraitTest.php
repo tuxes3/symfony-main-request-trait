@@ -57,8 +57,7 @@ final class MainRequestTraitTest extends TestCase
 
         $kernel = $this->prophesize(HttpKernelInterface::class);
 
-        $event = new class($kernel->reveal(), $request, HttpKernelInterface::MASTER_REQUEST) extends KernelEvent
-        {
+        $event = new class($kernel->reveal(), $request, HttpKernelInterface::MASTER_REQUEST) extends KernelEvent {
             /** @psalm-suppress InvalidReturnType */
             public function isMainRequest(): bool
             {
