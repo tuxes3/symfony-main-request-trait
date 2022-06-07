@@ -1,0 +1,57 @@
+{
+    "name": "setono/symfony-main-request-trait",
+    "description": "A PHP trait that makes the main/master request issue work on multiple Symfony versions",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Joachim Løvgaard",
+            "email": "joachim@loevgaard.dk"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+        "webmozart/assert": "^1.11"
+    },
+    "require-dev": {
+        "infection/infection": "^0.26",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.16",
+        "psalm/plugin-symfony": "^3.1",
+        "roave/security-advisories": "dev-latest",
+        "setono/code-quality-pack": "^2.2"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Setono\\MainRequestTrait\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\MainRequestTrait\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "infection/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "scripts": {
+        "analyse": "psalm --threads=8",
+        "check-style": "ecs check",
+        "fix-style": "ecs check --fix",
+        "phpunit": "phpunit"
+    }
+}
