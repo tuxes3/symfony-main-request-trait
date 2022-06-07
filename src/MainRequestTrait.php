@@ -13,22 +13,34 @@ trait MainRequestTrait
 {
     protected function getMainRequestFromRequestStack(RequestStack $requestStack): ?Request
     {
-        $request = null;
-
         if (method_exists($requestStack, 'getMainRequest')) {
-            $request = $requestStack->getMainRequest();
-        } elseif (method_exists($requestStack, 'getMasterRequest')) {
             /** @var Request|null $request */
-            $request = $requestStack->getMasterRequest();
+            $request = $requestStack->getMainRequest();
+
+            return $request;
         }
 
-        return $request;
+        if (method_exists($requestStack, 'getMasterRequest')) {
+            /** @var Request|null $request */
+            $request = $requestStack->getMasterRequest();
+
+            return $request;
+        }
+
+        throw new LogicException(sprintf(
+            'Neither the method %s::getMainRequest nor the method %s::getMasterRequest exists on the request stack object. This should not be possible.',
+            RequestStack::class,
+            RequestStack::class
+        ));
     }
 
     protected function isMainRequest(KernelEvent $event): bool
     {
         if (method_exists($event, 'isMainRequest')) {
-            return $event->isMainRequest();
+            /** @var bool $res */
+            $res = $event->isMainRequest();
+
+            return $res;
         }
 
         if (method_exists($event, 'isMasterRequest')) {

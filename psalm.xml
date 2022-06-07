@@ -25,5 +25,6 @@
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest"/>
             </errorLevel>
         </DeprecatedMethod>
+        <UnnecessaryVarAnnotation errorLevel="suppress"/>
     </issueHandlers>
 </psalm>
