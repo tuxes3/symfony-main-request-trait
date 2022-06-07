@@ -11,5 +11,5 @@
         }
     },
     "minMsi": 50,
-    "minCoveredMsi": 50
+    "minCoveredMsi": 100
 }
