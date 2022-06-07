@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * @covers MainRequestTrait
- */
 final class MainRequestTraitTest extends TestCase
 {
     use ProphecyTrait;
