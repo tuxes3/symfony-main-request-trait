@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\MainRequestTrait;
 
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
-use Webmozart\Assert\Assert;
 
 trait MainRequestTrait
 {
@@ -16,32 +16,32 @@ trait MainRequestTrait
         $request = null;
 
         if (method_exists($requestStack, 'getMainRequest')) {
-            /** @var Request|mixed|null $request */
             $request = $requestStack->getMainRequest();
         } elseif (method_exists($requestStack, 'getMasterRequest')) {
-            /** @var Request|mixed|null $request */
+            /** @var Request|null $request */
             $request = $requestStack->getMasterRequest();
         }
-
-        Assert::nullOrIsInstanceOf($request, Request::class);
 
         return $request;
     }
 
     protected function isMainRequest(KernelEvent $event): bool
     {
-        $res = null;
-
         if (method_exists($event, 'isMainRequest')) {
-            /** @var bool|mixed $res */
-            $res = $event->isMainRequest();
-        } elseif (method_exists($event, 'isMasterRequest')) {
-            /** @var bool|mixed $res */
-            $res = $event->isMasterRequest();
+            return $event->isMainRequest();
         }
 
-        Assert::boolean($res);
+        if (method_exists($event, 'isMasterRequest')) {
+            /** @var bool $res */
+            $res = $event->isMasterRequest();
 
-        return $res;
+            return $res;
+        }
+
+        throw new LogicException(sprintf(
+            'Neither the method %s::isMainRequest nor the method %s::isMasterRequest exists on the event object. This should not be possible.',
+            KernelEvent::class,
+            KernelEvent::class
+        ));
     }
 }
