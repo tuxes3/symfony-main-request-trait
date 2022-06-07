@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * @covers \MainRequestTrait
+ * @covers MainRequestTrait
  */
 final class MainRequestTraitTest extends TestCase
 {
