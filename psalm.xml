@@ -19,5 +19,11 @@
     </plugins>
     <issueHandlers>
         <DeprecatedConstant errorLevel="suppress"/>
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getMasterRequest"/>
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest"/>
+            </errorLevel>
+        </DeprecatedMethod>
     </issueHandlers>
 </psalm>
