@@ -1,7 +1,6 @@
 # Symfony Main Request Trait
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Code Coverage][ico-code-coverage]][link-code-coverage]
@@ -90,7 +89,6 @@ final class YourSubscriber implements EventSubscriberInterface
 ```
 
 [ico-version]: https://poser.pugx.org/setono/symfony-main-request-trait/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/symfony-main-request-trait/v/unstable
 [ico-license]: https://poser.pugx.org/setono/symfony-main-request-trait/license
 [ico-github-actions]: https://github.com/Setono/symfony-main-request-trait/workflows/build/badge.svg
 [ico-code-coverage]: https://codecov.io/gh/Setono/symfony-main-request-trait/branch/master/graph/badge.svg
